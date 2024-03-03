@@ -2,6 +2,7 @@ import httpx
 import json
 
 class ScrapTopUniversity:
+    ''' Web Scraping '''
 
     def download_json(self,url):
 

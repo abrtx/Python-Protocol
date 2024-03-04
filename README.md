@@ -1,19 +1,19 @@
 
 # Table of Contents
 
-1.  [SOLID principles](#orgbebdaf2)
-    1.  [D (Dependency Inversion)](#org21140f3)
-        1.  [Python&rsquo;s Protocol](#org29b8681)
-        2.  [Python Example](#org5180b2c)
+1.  [SOLID principles](#orgb78515d)
+    1.  [D (Dependency Inversion)](#orgb61bacd)
+        1.  [Python&rsquo;s Protocol](#orgdc3ca2e)
+        2.  [Python Example](#org32eafb1)
 
 
 
-<a id="orgbebdaf2"></a>
+<a id="orgb78515d"></a>
 
 # SOLID principles
 
 
-<a id="org21140f3"></a>
+<a id="orgb61bacd"></a>
 
 ## D (Dependency Inversion)
 
@@ -21,7 +21,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="org29b8681"></a>
+<a id="orgdc3ca2e"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -30,7 +30,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="org5180b2c"></a>
+<a id="org32eafb1"></a>
 
 ### Python Example
 
@@ -44,9 +44,12 @@ and functions alone.
         class ScrapTopUniversity:
             ''' Web Scraping '''
         
-            def download_json(self,url):
+            def __init__(self,url):
+        	self.url = url
         
-        	self.resp = httpx.get(url)
+            def download_json(self):
+        
+        	self.resp = httpx.get(self.url)
         
         	for node in self.resp.json()['score_nodes']:
         	    yield node

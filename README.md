@@ -1,19 +1,19 @@
 
 # Table of Contents
 
-1.  [SOLID principles](#orgb78515d)
-    1.  [D (Dependency Inversion)](#orgb61bacd)
-        1.  [Python&rsquo;s Protocol](#orgdc3ca2e)
-        2.  [Python Example](#org32eafb1)
+1.  [SOLID principles](#org0d799cb)
+    1.  [D (Dependency Inversion)](#orgd2c49cd)
+        1.  [Python&rsquo;s Protocol](#org3da1c6d)
+        2.  [Python Example](#org9ba9073)
 
 
 
-<a id="orgb78515d"></a>
+<a id="org0d799cb"></a>
 
 # SOLID principles
 
 
-<a id="orgb61bacd"></a>
+<a id="orgd2c49cd"></a>
 
 ## D (Dependency Inversion)
 
@@ -21,7 +21,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="orgdc3ca2e"></a>
+<a id="org3da1c6d"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -30,7 +30,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="org32eafb1"></a>
+<a id="org9ba9073"></a>
 
 ### Python Example
 
@@ -78,8 +78,8 @@ and functions alone.
         
         class ScrapProcessor:
         
-            def download_json(self,webS: WebScrap,url):
-        	return webS.download_json(url)
+            def download_json(self,webS: WebScrap):
+        	return webS.download_json()
         
         
         def main():
@@ -87,7 +87,7 @@ and functions alone.
             url = "https://www.topuniversities.com/rankings/endpoint?nid=3846212&page=4&items_per_page=15&tab=&region=&countries=&cities=&search=&star=&sort_by=&order_by=&program_type="
         
             scrap = ScrapProcessor()
-            top = scrap.download_json(ScrapTopUniversity(), url)
+            top = scrap.download_json(ScrapTopUniversity(url))
         
             for item in top:
         	print(item)

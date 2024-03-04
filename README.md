@@ -1,19 +1,19 @@
 
 # Table of Contents
 
-1.  [SOLID principles](#org0d799cb)
-    1.  [D (Dependency Inversion)](#orgd2c49cd)
-        1.  [Python&rsquo;s Protocol](#org3da1c6d)
-        2.  [Python Example](#org9ba9073)
+1.  [SOLID principles](#orgbf58035)
+    1.  [D (Dependency Inversion)](#orgef140a3)
+        1.  [Python&rsquo;s Protocol](#org4687ca6)
+        2.  [Python Example](#org503d25f)
 
 
 
-<a id="org0d799cb"></a>
+<a id="orgbf58035"></a>
 
 # SOLID principles
 
 
-<a id="orgd2c49cd"></a>
+<a id="orgef140a3"></a>
 
 ## D (Dependency Inversion)
 
@@ -21,7 +21,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="org3da1c6d"></a>
+<a id="org4687ca6"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -30,7 +30,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="org9ba9073"></a>
+<a id="org503d25f"></a>
 
 ### Python Example
 
@@ -61,7 +61,7 @@ and functions alone.
         
         
         class WebScrap(Protocol):
-            '''Protocol for Scrapping classes'''
+            '''Protocol for Scraping classes'''
         
             def download_json(self):
         	'''Download data from web API'''

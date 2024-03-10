@@ -1,23 +1,23 @@
 
 # Table of Contents
 
-1.  [SOLID principles](#orgb80286d)
-    1.  [D (Dependency Inversion)](#org92fe46e)
-        1.  [Python&rsquo;s Protocol](#orge57be44)
-        2.  [Python Example](#orgee97c3c)
-2.  [Libraries and utilities](#orgcd28b94)
-    1.  [Pydantic (Library)](#orgfb75bf3)
-        1.  [Why use Pydantic](#orgaaf1a45)
-        2.  [How to use](#org6160b82)
+1.  [SOLID principles](#orgf4d4350)
+    1.  [D (Dependency Inversion)](#orgcc91ee4)
+        1.  [Python&rsquo;s Protocol](#orgb7a203f)
+        2.  [Python Example](#org2b23bc1)
+2.  [Libraries and utilities](#orgaf69030)
+    1.  [Pydantic (Library)](#orgf633c5f)
+        1.  [Why use Pydantic](#orga599785)
+        2.  [How to use](#org1023758)
 
 
 
-<a id="orgb80286d"></a>
+<a id="orgf4d4350"></a>
 
 # SOLID principles
 
 
-<a id="org92fe46e"></a>
+<a id="orgcc91ee4"></a>
 
 ## D (Dependency Inversion)
 
@@ -25,7 +25,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="orge57be44"></a>
+<a id="orgb7a203f"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -34,7 +34,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="orgee97c3c"></a>
+<a id="org2b23bc1"></a>
 
 ### Python Example
 
@@ -102,12 +102,12 @@ and functions alone.
             main()
 
 
-<a id="orgcd28b94"></a>
+<a id="orgaf69030"></a>
 
 # Libraries and utilities
 
 
-<a id="orgfb75bf3"></a>
+<a id="orgf633c5f"></a>
 
 ## Pydantic (Library)
 
@@ -116,7 +116,7 @@ how data is processed in many powerful ways.
 More information <https://docs.pydantic.dev/latest/>
 
 
-<a id="orgaaf1a45"></a>
+<a id="orga599785"></a>
 
 ### Why use Pydantic
 
@@ -126,7 +126,7 @@ We could to define a BaseModel, feature from Pydantic
 library, and add that validator.
 
 
-<a id="org6160b82"></a>
+<a id="org1023758"></a>
 
 ### How to use
 
@@ -147,4 +147,34 @@ library, and add that validator.
     
     	if value == '':
     	    return 0
+
+1.  main
+
+        from rich import print
+        from libs.protocols import WebScrap
+        from libs.modules import ScrapTopUniversity
+        from libs.models import DataUni
+        
+        
+        class ScrapProcessor:
+        
+            def download_json(self, webS: WebScrap):
+        	return webS.download_json()
+        
+        
+        def main():
+        
+            url = "https://www.topuniversities.com/rankings/endpoint?nid=3846212&page=4&items_per_page=15&tab=&region=&countries=&cities=&search=&star=&sort_by=&order_by=&program_type="
+        
+            scrap = ScrapProcessor()
+            top = scrap.download_json(ScrapTopUniversity(url))
+        
+            item = [DataUni(**t) for t in top]
+        
+            for row in item:
+        	print(row.dict())
+        
+        
+        if __name__ == "__main__":
+            main()
 

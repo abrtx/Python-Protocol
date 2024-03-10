@@ -1,19 +1,23 @@
 
 # Table of Contents
 
-1.  [SOLID principles](#orgbf58035)
-    1.  [D (Dependency Inversion)](#orgef140a3)
-        1.  [Python&rsquo;s Protocol](#org4687ca6)
-        2.  [Python Example](#org503d25f)
+1.  [SOLID principles](#orgb80286d)
+    1.  [D (Dependency Inversion)](#org92fe46e)
+        1.  [Python&rsquo;s Protocol](#orge57be44)
+        2.  [Python Example](#orgee97c3c)
+2.  [Libraries and utilities](#orgcd28b94)
+    1.  [Pydantic (Library)](#orgfb75bf3)
+        1.  [Why use Pydantic](#orgaaf1a45)
+        2.  [How to use](#org6160b82)
 
 
 
-<a id="orgbf58035"></a>
+<a id="orgb80286d"></a>
 
 # SOLID principles
 
 
-<a id="orgef140a3"></a>
+<a id="org92fe46e"></a>
 
 ## D (Dependency Inversion)
 
@@ -21,7 +25,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="org4687ca6"></a>
+<a id="orge57be44"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -30,7 +34,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="org503d25f"></a>
+<a id="orgee97c3c"></a>
 
 ### Python Example
 
@@ -96,4 +100,51 @@ and functions alone.
         
         if __name__ == "__main__":
             main()
+
+
+<a id="orgcd28b94"></a>
+
+# Libraries and utilities
+
+
+<a id="orgfb75bf3"></a>
+
+## Pydantic (Library)
+
+Pydantic allows custom validators and serializers to alter 
+how data is processed in many powerful ways.
+More information <https://docs.pydantic.dev/latest/>
+
+
+<a id="orgaaf1a45"></a>
+
+### Why use Pydantic
+
+For scrapping example, there is a field that is in blank
+from API, and sometimes we need to set a default value. 
+We could to define a BaseModel, feature from Pydantic 
+library, and add that validator.
+
+
+<a id="org6160b82"></a>
+
+### How to use
+
+    from pydantic import BaseModel, validator
+    
+    
+    class DataUni(BaseModel):
+        title: str
+        region: str
+        stars: str
+        country: str
+        city: str
+        rank: str
+    
+        @validator('stars')
+        @classmethod
+        def stars_default(cls, value):
+    
+    	if value == '':
+    	    return 0
 

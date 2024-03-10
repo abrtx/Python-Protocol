@@ -1,23 +1,33 @@
 
 # Table of Contents
 
-1.  [SOLID principles](#orgf4d4350)
-    1.  [D (Dependency Inversion)](#orgcc91ee4)
-        1.  [Python&rsquo;s Protocol](#orgb7a203f)
-        2.  [Python Example](#org2b23bc1)
-2.  [Libraries and utilities](#orgaf69030)
-    1.  [Pydantic (Library)](#orgf633c5f)
-        1.  [Why use Pydantic](#orga599785)
-        2.  [How to use](#org1023758)
+1.  [Python&rsquo;s Features](#org08d27c6)
+2.  [SOLID principles](#org02b4f06)
+    1.  [D (Dependency Inversion)](#org6e8b0b9)
+        1.  [Python&rsquo;s Protocol](#orgcfac4a4)
+        2.  [Python Example](#org8754192)
+3.  [Libraries and utilities](#org15373ef)
+    1.  [Pydantic (Library)](#org85c6fb8)
+        1.  [Why use Pydantic](#org614fd4c)
+        2.  [How to use](#org448f0c5)
 
 
 
-<a id="orgf4d4350"></a>
+<a id="org08d27c6"></a>
+
+# Python&rsquo;s Features
+
+In data projects we need to solve issues. Abstract methods, 
+data modelers and data validators come to help there.
+That&rsquo;s what I try to show here
+
+
+<a id="org02b4f06"></a>
 
 # SOLID principles
 
 
-<a id="orgcc91ee4"></a>
+<a id="org6e8b0b9"></a>
 
 ## D (Dependency Inversion)
 
@@ -25,7 +35,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="orgb7a203f"></a>
+<a id="orgcfac4a4"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -34,7 +44,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="org2b23bc1"></a>
+<a id="org8754192"></a>
 
 ### Python Example
 
@@ -102,12 +112,12 @@ and functions alone.
             main()
 
 
-<a id="orgaf69030"></a>
+<a id="org15373ef"></a>
 
 # Libraries and utilities
 
 
-<a id="orgf633c5f"></a>
+<a id="org85c6fb8"></a>
 
 ## Pydantic (Library)
 
@@ -116,7 +126,7 @@ how data is processed in many powerful ways.
 More information <https://docs.pydantic.dev/latest/>
 
 
-<a id="orga599785"></a>
+<a id="org614fd4c"></a>
 
 ### Why use Pydantic
 
@@ -126,7 +136,7 @@ We could to define a BaseModel, feature from Pydantic
 library, and add that validator.
 
 
-<a id="org1023758"></a>
+<a id="org448f0c5"></a>
 
 ### How to use
 

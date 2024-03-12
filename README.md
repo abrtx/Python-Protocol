@@ -1,33 +1,36 @@
 
 # Table of Contents
 
-1.  [Python&rsquo;s Features](#org08d27c6)
-2.  [SOLID principles](#org02b4f06)
-    1.  [D (Dependency Inversion)](#org6e8b0b9)
-        1.  [Python&rsquo;s Protocol](#orgcfac4a4)
-        2.  [Python Example](#org8754192)
-3.  [Libraries and utilities](#org15373ef)
-    1.  [Pydantic (Library)](#org85c6fb8)
-        1.  [Why use Pydantic](#org614fd4c)
-        2.  [How to use](#org448f0c5)
+1.  [Python&rsquo;s Features](#org4ab680f)
+2.  [SOLID principles](#orgecc9a42)
+    1.  [D (Dependency Inversion)](#org573a229)
+        1.  [Python&rsquo;s Protocol](#orgc5c71d2)
+        2.  [Python Example](#orge953bc1)
+3.  [Libraries and utilities](#org609ca68)
+    1.  [Pydantic (Library)](#org04a6a23)
+        1.  [Why use Pydantic](#orgf7552d7)
+        2.  [How to use](#org8754e26)
+    2.  [Dependency Injection (programming technique)](#org04945df)
+        1.  [Why use Dependency Injection](#org0bc3bc7)
+        2.  [How to use](#orgb2c627d)
 
 
 
-<a id="org08d27c6"></a>
+<a id="org4ab680f"></a>
 
 # Python&rsquo;s Features
 
 In data projects we need to solve issues. Abstract methods, 
 data modelers and data validators come to help there.
-That&rsquo;s what I try to show here
+That&rsquo;s what I try to show here.
 
 
-<a id="org02b4f06"></a>
+<a id="orgecc9a42"></a>
 
 # SOLID principles
 
 
-<a id="org6e8b0b9"></a>
+<a id="org573a229"></a>
 
 ## D (Dependency Inversion)
 
@@ -35,7 +38,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="orgcfac4a4"></a>
+<a id="orgc5c71d2"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -44,7 +47,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="org8754192"></a>
+<a id="orge953bc1"></a>
 
 ### Python Example
 
@@ -112,12 +115,12 @@ and functions alone.
             main()
 
 
-<a id="org15373ef"></a>
+<a id="org609ca68"></a>
 
 # Libraries and utilities
 
 
-<a id="org85c6fb8"></a>
+<a id="org04a6a23"></a>
 
 ## Pydantic (Library)
 
@@ -126,17 +129,17 @@ how data is processed in many powerful ways.
 More information <https://docs.pydantic.dev/latest/>
 
 
-<a id="org614fd4c"></a>
+<a id="orgf7552d7"></a>
 
 ### Why use Pydantic
 
-For scrapping example, there is a field that is in blank
+For scraping example, there is a field that is in blank
 from API, and sometimes we need to set a default value. 
 We could to define a BaseModel, feature from Pydantic 
 library, and add that validator.
 
 
-<a id="org448f0c5"></a>
+<a id="org8754e26"></a>
 
 ### How to use
 
@@ -187,4 +190,39 @@ library, and add that validator.
         
         if __name__ == "__main__":
             main()
+
+
+<a id="org04945df"></a>
+
+## Dependency Injection (programming technique)
+
+An object or function receives other objects or 
+functions instead of creating it.
+
+
+<a id="org0bc3bc7"></a>
+
+### Why use Dependency Injection
+
+Because it helps to decrease coupling and increase 
+cohesion. Those metrics are often inversely correlated.
+We need to procure low coupling and high cohesion. 
+
+
+<a id="orgb2c627d"></a>
+
+### How to use
+
+In the previous example we can see it was applied.
+Here we can see that download<sub>json</sub> function receive
+WebScrap instead of create it.
+
+    from libs.protocols import WebScrap
+    from libs.modules import ScrapTopUniversity
+    
+    
+    class ScrapProcessor:
+    
+        def download_json(self,webS: WebScrap):
+    	return webS.download_json()
 

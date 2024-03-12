@@ -1,22 +1,22 @@
 
 # Table of Contents
 
-1.  [Python&rsquo;s Features](#org4ab680f)
-2.  [SOLID principles](#orgecc9a42)
-    1.  [D (Dependency Inversion)](#org573a229)
-        1.  [Python&rsquo;s Protocol](#orgc5c71d2)
-        2.  [Python Example](#orge953bc1)
-3.  [Libraries and utilities](#org609ca68)
-    1.  [Pydantic (Library)](#org04a6a23)
-        1.  [Why use Pydantic](#orgf7552d7)
-        2.  [How to use](#org8754e26)
-    2.  [Dependency Injection (programming technique)](#org04945df)
-        1.  [Why use Dependency Injection](#org0bc3bc7)
-        2.  [How to use](#orgb2c627d)
+1.  [Python&rsquo;s Features](#org8362d80)
+2.  [SOLID principles](#orgb07aec2)
+    1.  [D (Dependency Inversion)](#org9508996)
+        1.  [Python&rsquo;s Protocol](#org51b3263)
+        2.  [Python Example](#org1f2767e)
+3.  [Libraries and utilities](#org999c1d5)
+    1.  [Pydantic (Library)](#org6ec0983)
+        1.  [Why use Pydantic](#org674f049)
+        2.  [How to use](#orgbcb0807)
+    2.  [Dependency Injection (programming technique)](#org47f568e)
+        1.  [Why use Dependency Injection](#org31d16aa)
+        2.  [How to use](#orge865ef7)
 
 
 
-<a id="org4ab680f"></a>
+<a id="org8362d80"></a>
 
 # Python&rsquo;s Features
 
@@ -25,12 +25,12 @@ data modelers and data validators come to help there.
 That&rsquo;s what I try to show here.
 
 
-<a id="orgecc9a42"></a>
+<a id="orgb07aec2"></a>
 
 # SOLID principles
 
 
-<a id="org573a229"></a>
+<a id="org9508996"></a>
 
 ## D (Dependency Inversion)
 
@@ -38,7 +38,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="orgc5c71d2"></a>
+<a id="org51b3263"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -47,7 +47,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="orge953bc1"></a>
+<a id="org1f2767e"></a>
 
 ### Python Example
 
@@ -115,12 +115,12 @@ and functions alone.
             main()
 
 
-<a id="org609ca68"></a>
+<a id="org999c1d5"></a>
 
 # Libraries and utilities
 
 
-<a id="org04a6a23"></a>
+<a id="org6ec0983"></a>
 
 ## Pydantic (Library)
 
@@ -129,7 +129,7 @@ how data is processed in many powerful ways.
 More information <https://docs.pydantic.dev/latest/>
 
 
-<a id="orgf7552d7"></a>
+<a id="org674f049"></a>
 
 ### Why use Pydantic
 
@@ -139,7 +139,7 @@ We could to define a BaseModel, feature from Pydantic
 library, and add that validator.
 
 
-<a id="org8754e26"></a>
+<a id="orgbcb0807"></a>
 
 ### How to use
 
@@ -192,7 +192,7 @@ library, and add that validator.
             main()
 
 
-<a id="org04945df"></a>
+<a id="org47f568e"></a>
 
 ## Dependency Injection (programming technique)
 
@@ -200,7 +200,7 @@ An object or function receives other objects or
 functions instead of creating it.
 
 
-<a id="org0bc3bc7"></a>
+<a id="org31d16aa"></a>
 
 ### Why use Dependency Injection
 
@@ -209,7 +209,7 @@ cohesion. Those metrics are often inversely correlated.
 We need to procure low coupling and high cohesion. 
 
 
-<a id="orgb2c627d"></a>
+<a id="orge865ef7"></a>
 
 ### How to use
 
@@ -218,7 +218,6 @@ Here we can see that download<sub>json</sub> function receive
 WebScrap instead of create it.
 
     from libs.protocols import WebScrap
-    from libs.modules import ScrapTopUniversity
     
     
     class ScrapProcessor:

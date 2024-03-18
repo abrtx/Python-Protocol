@@ -1,24 +1,24 @@
 
 # Table of Contents
 
-1.  [Python&rsquo;s Features](#orgad78422)
-2.  [SOLID principles](#orgeb6853a)
-    1.  [D (Dependency Inversion)](#org98b57a7)
-        1.  [Python&rsquo;s Protocol](#org113b38d)
-        2.  [Python Example](#org9f498c4)
-3.  [Libraries and utilities](#org4772935)
-    1.  [Pydantic (Library)](#org850979f)
-        1.  [Why use Pydantic](#orgb928ca5)
-        2.  [How to use](#org36c3f25)
-    2.  [Dependency Injection (programming technique)](#org7c452de)
-        1.  [Why use Dependency Injection](#orgdac62d5)
-        2.  [How to use](#org461017b)
-    3.  [PySpark](#org57aa3d0)
-        1.  [How to use](#org0718459)
+1.  [Python&rsquo;s Features](#orgc95a6d2)
+2.  [SOLID principles](#orgbeea2cd)
+    1.  [D (Dependency Inversion)](#org3faa540)
+        1.  [Python&rsquo;s Protocol](#org354e812)
+        2.  [Python Example](#org1775fec)
+3.  [Libraries and utilities](#orgf54bd78)
+    1.  [Pydantic (Library)](#org5cd20b6)
+        1.  [Why use Pydantic](#orgae2d2b6)
+        2.  [How to use](#org0896508)
+    2.  [Dependency Injection (programming technique)](#org7eca403)
+        1.  [Why use Dependency Injection](#orgc39a602)
+        2.  [How to use](#org4f7f043)
+    3.  [PySpark](#orgb33bfc5)
+        1.  [How to use](#org66258c7)
 
 
 
-<a id="orgad78422"></a>
+<a id="orgc95a6d2"></a>
 
 # Python&rsquo;s Features
 
@@ -27,12 +27,12 @@ data modelers and data validators come to help there.
 That&rsquo;s what I try to show here.
 
 
-<a id="orgeb6853a"></a>
+<a id="orgbeea2cd"></a>
 
 # SOLID principles
 
 
-<a id="org98b57a7"></a>
+<a id="org3faa540"></a>
 
 ## D (Dependency Inversion)
 
@@ -40,7 +40,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="org113b38d"></a>
+<a id="org354e812"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -49,7 +49,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="org9f498c4"></a>
+<a id="org1775fec"></a>
 
 ### Python Example
 
@@ -117,12 +117,12 @@ and functions alone.
             main()
 
 
-<a id="org4772935"></a>
+<a id="orgf54bd78"></a>
 
 # Libraries and utilities
 
 
-<a id="org850979f"></a>
+<a id="org5cd20b6"></a>
 
 ## Pydantic (Library)
 
@@ -131,7 +131,7 @@ how data is processed in many powerful ways.
 More information <https://docs.pydantic.dev/latest/>
 
 
-<a id="orgb928ca5"></a>
+<a id="orgae2d2b6"></a>
 
 ### Why use Pydantic
 
@@ -141,7 +141,7 @@ We could to define a BaseModel, feature from Pydantic
 library, and add that validator.
 
 
-<a id="org36c3f25"></a>
+<a id="org0896508"></a>
 
 ### How to use
 
@@ -194,7 +194,7 @@ library, and add that validator.
             main()
 
 
-<a id="org7c452de"></a>
+<a id="org7eca403"></a>
 
 ## Dependency Injection (programming technique)
 
@@ -202,7 +202,7 @@ An object or function receives other objects or
 functions instead of creating it.
 
 
-<a id="orgdac62d5"></a>
+<a id="orgc39a602"></a>
 
 ### Why use Dependency Injection
 
@@ -211,7 +211,7 @@ cohesion. Those metrics are often inversely correlated.
 We need to procure low coupling and high cohesion. 
 
 
-<a id="org461017b"></a>
+<a id="org4f7f043"></a>
 
 ### How to use
 
@@ -228,7 +228,7 @@ WebScrap instead of create it.
     	return webS.download_json()
 
 
-<a id="org57aa3d0"></a>
+<a id="orgb33bfc5"></a>
 
 ## PySpark
 
@@ -238,7 +238,7 @@ data processing in a distributed environment using Python.
 For more information: <https://spark.apache.org/docs/latest/api/python/index.html#:~:text=PySpark%20is%20the%20Python%20API,for%20interactively%20analyzing%20your%20data>.
 
 
-<a id="org0718459"></a>
+<a id="org66258c7"></a>
 
 ### How to use
 
@@ -278,4 +278,46 @@ For more information: <https://spark.apache.org/docs/latest/api/python/index.htm
         
             df.createOrReplaceTempView("table") # using like SQL language
             sc.sql('select title, rank from table order by rank desc').show(20, False)
+    
+    1.  Example
+    
+            +---------------+----------------+----+-------------+-----+----------------------------------------------------------+
+            |city           |country         |rank|region       |stars|title                                                     |
+            +---------------+----------------+----+-------------+-----+----------------------------------------------------------+
+            |Mexico City    |Mexico          |61  |Latin America|0    |Universidad Nacional Autónoma de México  (UNAM)           |
+            |Seattle        |United States   |62  |North America|0    |University of Washington                                  |
+            |Dhahran        |Saudi Arabia    |63  |Asia         |0    |King Fahd University of Petroleum & Minerals              |
+            |Paris          |France          |64  |Europe       |0    |Sorbonne University                                       |
+            |Barcelona      |Spain           |65  |Europe       |0    |Universitat Politècnica de Catalunya · BarcelonaTech (UPC)|
+            |Kuala Lumpur   |Malaysia        |66  |Asia         |0    |Universiti Malaya (UM)                                    |
+            |Kyoto          |Japan           |67  |Asia         |0    |Kyoto University                                          |
+            |Chennai        |India           |68  |Asia         |0    |Indian Institute of Technology Madras (IITM)              |
+            |São Paulo      |Brazil          |69  |Latin America|0    |Universidade de São Paulo                                 |
+            |Melbourne      |Australia       |70  |Oceania      |0    |Monash University                                         |
+            |New Haven      |United States   |71  |North America|0    |Yale University                                           |
+            |Harbin         |China (Mainland)|72  |Asia         |0    |Harbin Institute of Technology                            |
+            |University Park|United States   |73  |North America|0    |Pennsylvania State University                             |
+            |Pohang         |South Korea     |74  |Asia         |0    |Pohang University of Science And Technology (POSTECH)     |
+            |Monterrey      |Mexico          |75  |Latin America|NULL |Tecnológico de Monterrey                                  |
+            +---------------+----------------+----+-------------+-----+----------------------------------------------------------+
+            
+            +----------------------------------------------------------+----+
+            |title                                                     |rank|
+            +----------------------------------------------------------+----+
+            |Tecnológico de Monterrey                                  |75  |
+            |Pohang University of Science And Technology (POSTECH)     |74  |
+            |Pennsylvania State University                             |73  |
+            |Harbin Institute of Technology                            |72  |
+            |Yale University                                           |71  |
+            |Monash University                                         |70  |
+            |Universidade de São Paulo                                 |69  |
+            |Indian Institute of Technology Madras (IITM)              |68  |
+            |Kyoto University                                          |67  |
+            |Universiti Malaya (UM)                                    |66  |
+            |Universitat Politècnica de Catalunya · BarcelonaTech (UPC)|65  |
+            |Sorbonne University                                       |64  |
+            |King Fahd University of Petroleum & Minerals              |63  |
+            |University of Washington                                  |62  |
+            |Universidad Nacional Autónoma de México  (UNAM)           |61  |
+            +----------------------------------------------------------+----+
 

@@ -1,22 +1,24 @@
 
 # Table of Contents
 
-1.  [Python&rsquo;s Features](#org8362d80)
-2.  [SOLID principles](#orgb07aec2)
-    1.  [D (Dependency Inversion)](#org9508996)
-        1.  [Python&rsquo;s Protocol](#org51b3263)
-        2.  [Python Example](#org1f2767e)
-3.  [Libraries and utilities](#org999c1d5)
-    1.  [Pydantic (Library)](#org6ec0983)
-        1.  [Why use Pydantic](#org674f049)
-        2.  [How to use](#orgbcb0807)
-    2.  [Dependency Injection (programming technique)](#org47f568e)
-        1.  [Why use Dependency Injection](#org31d16aa)
-        2.  [How to use](#orge865ef7)
+1.  [Python&rsquo;s Features](#orgad78422)
+2.  [SOLID principles](#orgeb6853a)
+    1.  [D (Dependency Inversion)](#org98b57a7)
+        1.  [Python&rsquo;s Protocol](#org113b38d)
+        2.  [Python Example](#org9f498c4)
+3.  [Libraries and utilities](#org4772935)
+    1.  [Pydantic (Library)](#org850979f)
+        1.  [Why use Pydantic](#orgb928ca5)
+        2.  [How to use](#org36c3f25)
+    2.  [Dependency Injection (programming technique)](#org7c452de)
+        1.  [Why use Dependency Injection](#orgdac62d5)
+        2.  [How to use](#org461017b)
+    3.  [PySpark](#org57aa3d0)
+        1.  [How to use](#org0718459)
 
 
 
-<a id="org8362d80"></a>
+<a id="orgad78422"></a>
 
 # Python&rsquo;s Features
 
@@ -25,12 +27,12 @@ data modelers and data validators come to help there.
 That&rsquo;s what I try to show here.
 
 
-<a id="orgb07aec2"></a>
+<a id="orgeb6853a"></a>
 
 # SOLID principles
 
 
-<a id="org9508996"></a>
+<a id="org98b57a7"></a>
 
 ## D (Dependency Inversion)
 
@@ -38,7 +40,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="org51b3263"></a>
+<a id="org113b38d"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -47,7 +49,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="org1f2767e"></a>
+<a id="org9f498c4"></a>
 
 ### Python Example
 
@@ -115,12 +117,12 @@ and functions alone.
             main()
 
 
-<a id="org999c1d5"></a>
+<a id="org4772935"></a>
 
 # Libraries and utilities
 
 
-<a id="org6ec0983"></a>
+<a id="org850979f"></a>
 
 ## Pydantic (Library)
 
@@ -129,7 +131,7 @@ how data is processed in many powerful ways.
 More information <https://docs.pydantic.dev/latest/>
 
 
-<a id="org674f049"></a>
+<a id="orgb928ca5"></a>
 
 ### Why use Pydantic
 
@@ -139,7 +141,7 @@ We could to define a BaseModel, feature from Pydantic
 library, and add that validator.
 
 
-<a id="orgbcb0807"></a>
+<a id="org36c3f25"></a>
 
 ### How to use
 
@@ -192,7 +194,7 @@ library, and add that validator.
             main()
 
 
-<a id="org47f568e"></a>
+<a id="org7c452de"></a>
 
 ## Dependency Injection (programming technique)
 
@@ -200,7 +202,7 @@ An object or function receives other objects or
 functions instead of creating it.
 
 
-<a id="org31d16aa"></a>
+<a id="orgdac62d5"></a>
 
 ### Why use Dependency Injection
 
@@ -209,7 +211,7 @@ cohesion. Those metrics are often inversely correlated.
 We need to procure low coupling and high cohesion. 
 
 
-<a id="orge865ef7"></a>
+<a id="org461017b"></a>
 
 ### How to use
 
@@ -224,4 +226,56 @@ WebScrap instead of create it.
     
         def download_json(self,webS: WebScrap):
     	return webS.download_json()
+
+
+<a id="org57aa3d0"></a>
+
+## PySpark
+
+PySpark is the Python API for Apache Spark. 
+It enables you to perform real-time, large-scale 
+data processing in a distributed environment using Python.
+For more information: <https://spark.apache.org/docs/latest/api/python/index.html#:~:text=PySpark%20is%20the%20Python%20API,for%20interactively%20analyzing%20your%20data>.
+
+
+<a id="org0718459"></a>
+
+### How to use
+
+1.  Config
+
+        from pyspark.sql import SparkSession
+        from pyspark import SparkConf
+        
+        
+        conf = SparkConf().setAppName("MyScraper") \
+        	    .setMaster("local[2]") \
+        	    .set("spark.executor.memory", "2g") \
+        	    .set("spark.executor.cores", "2")
+        
+        sc = SparkSession.builder.config(conf=conf).getOrCreate()
+        
+        print(SparkConf().getAll())
+
+2.  Using with Scraper
+
+        
+        def main():
+        
+            url = "https://www.topuniversities.com/rankings/endpoint?nid=3846212&page=4&items_per_page=15&tab=&region=&countries=&cities=&search=&star=&sort_by=&order_by=&program_type="
+        
+            scrap = ScrapProcessor()
+            top = scrap.download_json(ScrapTopUniversity(url))
+        
+            item = [DataUni(**t) for t in top]
+        
+            # for row in item:
+            #     print(row.dict())
+        
+            df = sc.createDataFrame(data=item) # create into Spark context
+        
+            df.show(truncate=False)
+        
+            df.createOrReplaceTempView("table") # using like SQL language
+            sc.sql('select title, rank from table order by rank desc').show(20, False)
 

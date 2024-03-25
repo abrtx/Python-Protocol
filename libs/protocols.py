@@ -6,4 +6,3 @@ class WebScrap(Protocol):
 
     def download_json(self):
         '''Download data from web API'''
-        

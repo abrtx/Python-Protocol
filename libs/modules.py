@@ -11,5 +11,5 @@ class ScrapTopUniversity:
 
         self.resp = httpx.get(self.url)
 
-        for node in self.resp.json()['score_nodes']:
+        for node in self.resp.json()['subjects']['Broad subject area']:  # ['score_nodes']:
             yield node

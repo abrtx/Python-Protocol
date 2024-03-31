@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from typing import Optional, List
+from pydantic import BaseModel, Field
 
 
 class EmployRank(BaseModel):
@@ -12,6 +13,20 @@ class BroadSubArea(BaseModel):
     url: str = None
 
 
-class BroadSpecificSubArea(BaseModel):
-    name: str = None
-    url: str = None
+class UniWebEmail(BaseModel):
+    uni_website: str | None = None
+    uni_email: str | None = None
+
+
+class PublicHoliday(BaseModel):
+    startDate: str = None
+    endDate: str = None
+
+
+class UniRank(BaseModel):
+    title: str = None
+    path: str = None
+    region: str = None
+    country: str = None
+    city: str = None
+    overall_score: str = None

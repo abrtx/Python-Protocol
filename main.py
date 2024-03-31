@@ -6,15 +6,6 @@ from pyspark.sql import SparkSession
 from pyspark import SparkConf
 
 
-# conf = SparkConf().setAppName("MyScraping") \
-#             .setMaster("local") \
-#             .set("spark.executor.memory", "2g") \
-#             .set("spark.executor.cores", "2")
-
-# sc = SparkSession.builder.config(conf=conf).getOrCreate()
-
-# print(SparkConf().getAll())
-
 
 class ScrapProcessor:
 
@@ -24,36 +15,27 @@ class ScrapProcessor:
 
 def main():
 
-    url = "https://www.topuniversities.com/rankings/endpoint?nid=3846212&page=4&items_per_page=15&tab=&region=&countries=&cities=&search=&star=&sort_by=&order_by=&program_type="
+    url1 = "https://www.topuniversities.com/rankings/endpoint?nid=3846272&page=0&items_per_page=2&tab="
 
-    url1 = "https://www.topuniversities.com/sites/default/files/qs-rankings-data/en/3751069_indicators.txt?sadmbz"
+    url2 = "https://www.topuniversities.com/ranking_table_ctas"
 
     url3 = "https://www.topuniversities.com/rankings/filter/endpoint?nid=3846272&tab=indicators"
+    url4 = "https://date.nager.at/api/v3/LongWeekend/2024/CL"
 
     scrap = ScrapProcessor()
-    top = scrap.download_json(ScrapTopUniversity(url3))
+    top = scrap.download_json(
+        ScrapTopUniversity(
+            # url3, ['subjects', 'Broad subject area']))  # 0
+            url1, ['score_nodes']))  # 3
+            # url2, ['data']))  # 4
+            # url4, []))  # 2
 
-    # item = [DataUni(**t) for t in top]
+    comp2 = DataComp().test_comp_3()
 
-    # for row in item:
-    #     print(row.dict())
+    item2 = [comp2(**t) for t in top]
 
-    # df = sc.createDataFrame(data=item)
-
-    # df.show(truncate=False)
-
-    # df.createOrReplaceTempView("table")
-    # sc.sql('select title, rank from table order by rank desc').show(20, False)
-
-    comp = DataComp()
-
-    item = [DataComp(**t) for t in top]
-
-    for row in item:
-        print(row.dict())
-
-    comp.test_comp_0()
-    # comp.test_comp_1()
+    for row in item2:
+        print(row.dict(exclude_none=True))
 
 
 if __name__ == "__main__":

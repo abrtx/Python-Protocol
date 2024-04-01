@@ -7,8 +7,6 @@ class ScrapTopUniversity:
     def __init__(self, url, args=[]):
         self.url = url
         self.args = args
-        # self.key0: str = args[0]
-        # self.key1: str = args[1]
 
     def download_json(self):
 

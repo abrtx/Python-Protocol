@@ -1,10 +1,7 @@
 from rich import print
 from libs.protocols import WebScrap
 from libs.modules import ScrapTopUniversity
-from libs.models import DataUni, DataComp
-from pyspark.sql import SparkSession
-from pyspark import SparkConf
-
+from libs.models import DataComp
 
 
 class ScrapProcessor:

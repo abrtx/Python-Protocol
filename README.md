@@ -1,24 +1,27 @@
 
 # Table of Contents
 
-1.  [Python&rsquo;s Features](#orgc95a6d2)
-2.  [SOLID principles](#orgbeea2cd)
-    1.  [D (Dependency Inversion)](#org3faa540)
-        1.  [Python&rsquo;s Protocol](#org354e812)
-        2.  [Python Example](#org1775fec)
-3.  [Libraries and utilities](#orgf54bd78)
-    1.  [Pydantic (Library)](#org5cd20b6)
-        1.  [Why use Pydantic](#orgae2d2b6)
-        2.  [How to use](#org0896508)
-    2.  [Dependency Injection (programming technique)](#org7eca403)
-        1.  [Why use Dependency Injection](#orgc39a602)
-        2.  [How to use](#org4f7f043)
-    3.  [PySpark](#orgb33bfc5)
-        1.  [How to use](#org66258c7)
+1.  [Python&rsquo;s Features](#org56733da)
+2.  [SOLID principles](#org9b6a2af)
+    1.  [D (Dependency Inversion)](#orgea47b17)
+        1.  [Python&rsquo;s Protocol](#org352fd2b)
+        2.  [Python Example](#orgc157a81)
+3.  [OOP concepts](#org66eab4a)
+    1.  [Composition](#orged2473a)
+        1.  [Example](#org61cd94d)
+4.  [Libraries and utilities](#org0defaeb)
+    1.  [Pydantic (Library)](#org24617be)
+        1.  [Why use Pydantic](#org3402bac)
+        2.  [How to use](#orgbebd556)
+    2.  [Dependency Injection (programming technique)](#org567d84b)
+        1.  [Why use Dependency Injection](#org973997b)
+        2.  [How to use](#org7627db1)
+    3.  [PySpark](#org31be416)
+        1.  [How to use](#org9904e2c)
 
 
 
-<a id="orgc95a6d2"></a>
+<a id="org56733da"></a>
 
 # Python&rsquo;s Features
 
@@ -27,12 +30,12 @@ data modelers and data validators come to help there.
 That&rsquo;s what I try to show here.
 
 
-<a id="orgbeea2cd"></a>
+<a id="org9b6a2af"></a>
 
 # SOLID principles
 
 
-<a id="org3faa540"></a>
+<a id="orgea47b17"></a>
 
 ## D (Dependency Inversion)
 
@@ -40,7 +43,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="org354e812"></a>
+<a id="org352fd2b"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -49,7 +52,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="org1775fec"></a>
+<a id="orgc157a81"></a>
 
 ### Python Example
 
@@ -117,12 +120,135 @@ and functions alone.
             main()
 
 
-<a id="orgf54bd78"></a>
+<a id="org66eab4a"></a>
+
+# OOP concepts
+
+
+<a id="orged2473a"></a>
+
+## Composition
+
+It describes a class that references one or more objects of 
+other classes in instance variables.
+
+
+<a id="org61cd94d"></a>
+
+### Example
+
+1.  Downloading
+
+    A little modification for trying to cover some posibilities.
+    
+        import httpx
+        
+        
+        class ScrapTopUniversity:
+            ''' Web Scraping '''
+        
+            def __init__(self, url, args=[]):
+        	self.url = url
+        	self.args = args
+        
+            def download_json(self):
+        
+        	print(self.args)
+        	self.resp = httpx.get(self.url)
+        
+        	if len(self.args) == 0:
+        	    for node in self.resp.json()[:10]:
+        		yield node
+        	elif len(self.args) == 1:
+        	    for node in self.resp.json()[self.args[0]][:10]:
+        		yield node
+        	else:
+        	    for node in self.resp.json()[self.args[0]][self.args[1]][:10]:
+        		yield node
+
+2.  Components
+
+        from pydantic import BaseModel
+        
+        
+        class EmployRank(BaseModel):
+            region: str = None
+            city: str = None
+            rank_19: str = None
+        
+        
+        class BroadSubArea(BaseModel):
+            name: str = None
+            url: str = None
+        
+        
+        class UniWebEmail(BaseModel):
+            uni_website: str | None = None
+            uni_email: str | None = None
+        
+        
+        class PublicHoliday(BaseModel):
+            startDate: str = None
+            endDate: str = None
+        
+        
+        class UniRank(BaseModel):
+            title: str = None
+            path: str = None
+            region: str = None
+            country: str = None
+            city: str = None
+            overall_score: str = None
+
+3.  Main
+
+        from rich import print
+        from libs.protocols import WebScrap
+        from libs.modules import ScrapTopUniversity
+        from libs.models import DataComp
+        
+        
+        class ScrapProcessor:
+        
+            def download_json(self, webS: WebScrap):
+        	return webS.download_json()
+        
+        
+        def main():
+        
+            url1 = "https://www.topuniversities.com/rankings/endpoint?nid=3846272&page=0&items_per_page=2&tab="
+        
+            url2 = "https://www.topuniversities.com/ranking_table_ctas"
+        
+            url3 = "https://www.topuniversities.com/rankings/filter/endpoint?nid=3846272&tab=indicators"
+            url4 = "https://date.nager.at/api/v3/LongWeekend/2024/CL"
+        
+            scrap = ScrapProcessor()
+            top = scrap.download_json(
+        	ScrapTopUniversity(
+        	    # url3, ['subjects', 'Broad subject area']))  # 0
+        	    url1, ['score_nodes']))  # 3
+        	    # url2, ['data']))  # 4
+        	    # url4, []))  # 2
+        
+            comp2 = DataComp().test_comp_3()
+        
+            item2 = [comp2(**t) for t in top]
+        
+            for row in item2:
+        	print(row.dict(exclude_none=True))
+        
+        
+        if __name__ == "__main__":
+            main()
+
+
+<a id="org0defaeb"></a>
 
 # Libraries and utilities
 
 
-<a id="org5cd20b6"></a>
+<a id="org24617be"></a>
 
 ## Pydantic (Library)
 
@@ -131,7 +257,7 @@ how data is processed in many powerful ways.
 More information <https://docs.pydantic.dev/latest/>
 
 
-<a id="orgae2d2b6"></a>
+<a id="org3402bac"></a>
 
 ### Why use Pydantic
 
@@ -141,7 +267,7 @@ We could to define a BaseModel, feature from Pydantic
 library, and add that validator.
 
 
-<a id="org0896508"></a>
+<a id="orgbebd556"></a>
 
 ### How to use
 
@@ -194,7 +320,7 @@ library, and add that validator.
             main()
 
 
-<a id="org7eca403"></a>
+<a id="org567d84b"></a>
 
 ## Dependency Injection (programming technique)
 
@@ -202,7 +328,7 @@ An object or function receives other objects or
 functions instead of creating it.
 
 
-<a id="orgc39a602"></a>
+<a id="org973997b"></a>
 
 ### Why use Dependency Injection
 
@@ -211,7 +337,7 @@ cohesion. Those metrics are often inversely correlated.
 We need to procure low coupling and high cohesion. 
 
 
-<a id="org4f7f043"></a>
+<a id="org7627db1"></a>
 
 ### How to use
 
@@ -228,7 +354,7 @@ WebScrap instead of create it.
     	return webS.download_json()
 
 
-<a id="orgb33bfc5"></a>
+<a id="org31be416"></a>
 
 ## PySpark
 
@@ -238,7 +364,7 @@ data processing in a distributed environment using Python.
 For more information: <https://spark.apache.org/docs/latest/api/python/index.html#:~:text=PySpark%20is%20the%20Python%20API,for%20interactively%20analyzing%20your%20data>.
 
 
-<a id="org66258c7"></a>
+<a id="org9904e2c"></a>
 
 ### How to use
 

@@ -1,27 +1,27 @@
 
 # Table of Contents
 
-1.  [Python&rsquo;s Features](#orgc792466)
-2.  [SOLID principles](#org6496da4)
-    1.  [D (Dependency Inversion)](#org155ac84)
-        1.  [Python&rsquo;s Protocol](#org3866831)
-        2.  [Python Example](#org079ad63)
-3.  [OOP concepts](#org9a4e03f)
-    1.  [Composition](#orgbf02e33)
-        1.  [Example](#org0305027)
-4.  [Libraries and utilities](#org63a84d0)
-    1.  [Pydantic (Library)](#org48affbd)
-        1.  [Why use Pydantic](#org43b5eb1)
-        2.  [How to use](#org8bab8dd)
-    2.  [Dependency Injection (programming technique)](#org90f0542)
-        1.  [Why use Dependency Injection](#orgf695dbb)
-        2.  [How to use](#org1ffd983)
-    3.  [PySpark](#org245e072)
-        1.  [How to use](#orgc97eeed)
+1.  [Python&rsquo;s Features](#orgff097cb)
+2.  [SOLID principles](#org6627e7e)
+    1.  [D (Dependency Inversion)](#orgae66aad)
+        1.  [Python&rsquo;s Protocol](#org221175e)
+        2.  [Python Example](#orgdb88e13)
+3.  [OOP concepts](#org6b97310)
+    1.  [Composition](#orgba0fbf5)
+        1.  [Example](#org692dd06)
+4.  [Libraries and utilities](#org98448e1)
+    1.  [Pydantic (Library)](#orgc8232f6)
+        1.  [Why use Pydantic](#orgd7cae5f)
+        2.  [How to use](#org6d148cc)
+    2.  [Dependency Injection (programming technique)](#org035a030)
+        1.  [Why use Dependency Injection](#orgab1f5ce)
+        2.  [How to use](#orgac6b0b0)
+    3.  [PySpark](#org86d3ce8)
+        1.  [How to use](#org28364a5)
 
 
 
-<a id="orgc792466"></a>
+<a id="orgff097cb"></a>
 
 # Python&rsquo;s Features
 
@@ -30,12 +30,12 @@ data modelers and data validators come to help there.
 That&rsquo;s what I try to show here.
 
 
-<a id="org6496da4"></a>
+<a id="org6627e7e"></a>
 
 # SOLID principles
 
 
-<a id="org155ac84"></a>
+<a id="orgae66aad"></a>
 
 ## D (Dependency Inversion)
 
@@ -43,7 +43,7 @@ Classes depend on abstract classes (Python Protocols)
 not on specific classes
 
 
-<a id="org3866831"></a>
+<a id="org221175e"></a>
 
 ### Python&rsquo;s Protocol
 
@@ -52,7 +52,7 @@ classes are compatible based on available attributes
 and functions alone.
 
 
-<a id="org079ad63"></a>
+<a id="orgdb88e13"></a>
 
 ### Python Example
 
@@ -120,12 +120,12 @@ and functions alone.
             main()
 
 
-<a id="org9a4e03f"></a>
+<a id="org6b97310"></a>
 
 # OOP concepts
 
 
-<a id="orgbf02e33"></a>
+<a id="orgba0fbf5"></a>
 
 ## Composition
 
@@ -133,7 +133,7 @@ It describes a class that references one or more objects of
 other classes in instance variables.
 
 
-<a id="org0305027"></a>
+<a id="org692dd06"></a>
 
 ### Example
 
@@ -200,7 +200,31 @@ other classes in instance variables.
             city: str = None
             overall_score: str = None
 
-3.  Main
+3.  Models
+
+        
+        from comp import BroadSubArea, PublicHoliday, UniRank, UniWebEmail
+        
+        
+        class DataComp(BaseModel):
+            comp_0: str = BroadSubArea
+            comp_2: str = PublicHoliday
+            comp_3: str = UniRank
+            comp_4: str = UniWebEmail
+        
+            def test_comp_0(self):
+        	return self.comp_0
+        
+            def test_comp_2(self):
+        	return self.comp_2
+        
+            def test_comp_3(self):
+        	return self.comp_3
+        
+            def test_comp_4(self):
+        	return self.comp_4
+
+4.  Main
 
         from rich import print
         from libs.protocols import WebScrap
@@ -242,7 +266,7 @@ other classes in instance variables.
         if __name__ == "__main__":
             main()
 
-4.  Outputs
+5.  Outputs
 
         
         (scraping) abrtx@abrtx-laptop:~/work/python/web_scraping$ python main.py 
@@ -295,12 +319,12 @@ other classes in instance variables.
         (scraping) abrtx@abrtx-laptop:~/work/python/web_scraping$ 
 
 
-<a id="org63a84d0"></a>
+<a id="org98448e1"></a>
 
 # Libraries and utilities
 
 
-<a id="org48affbd"></a>
+<a id="orgc8232f6"></a>
 
 ## Pydantic (Library)
 
@@ -309,7 +333,7 @@ how data is processed in many powerful ways.
 More information <https://docs.pydantic.dev/latest/>
 
 
-<a id="org43b5eb1"></a>
+<a id="orgd7cae5f"></a>
 
 ### Why use Pydantic
 
@@ -319,7 +343,7 @@ We could to define a BaseModel, feature from Pydantic
 library, and add that validator.
 
 
-<a id="org8bab8dd"></a>
+<a id="org6d148cc"></a>
 
 ### How to use
 
@@ -372,7 +396,7 @@ library, and add that validator.
             main()
 
 
-<a id="org90f0542"></a>
+<a id="org035a030"></a>
 
 ## Dependency Injection (programming technique)
 
@@ -380,7 +404,7 @@ An object or function receives other objects or
 functions instead of creating it.
 
 
-<a id="orgf695dbb"></a>
+<a id="orgab1f5ce"></a>
 
 ### Why use Dependency Injection
 
@@ -389,7 +413,7 @@ cohesion. Those metrics are often inversely correlated.
 We need to procure low coupling and high cohesion. 
 
 
-<a id="org1ffd983"></a>
+<a id="orgac6b0b0"></a>
 
 ### How to use
 
@@ -406,7 +430,7 @@ WebScrap instead of create it.
     	return webS.download_json()
 
 
-<a id="org245e072"></a>
+<a id="org86d3ce8"></a>
 
 ## PySpark
 
@@ -416,7 +440,7 @@ data processing in a distributed environment using Python.
 For more information: <https://spark.apache.org/docs/latest/api/python/index.html#:~:text=PySpark%20is%20the%20Python%20API,for%20interactively%20analyzing%20your%20data>.
 
 
-<a id="orgc97eeed"></a>
+<a id="org28364a5"></a>
 
 ### How to use
 

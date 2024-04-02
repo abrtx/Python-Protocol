@@ -3,6 +3,25 @@ from pydantic import BaseModel, validator, Field, TypeAdapter
 from comp import BroadSubArea, PublicHoliday, UniRank, UniWebEmail
 
 
+class DataComp(BaseModel):
+    comp_0: str = BroadSubArea
+    comp_2: str = PublicHoliday
+    comp_3: str = UniRank
+    comp_4: str = UniWebEmail
+
+    def test_comp_0(self):
+        return self.comp_0
+
+    def test_comp_2(self):
+        return self.comp_2
+
+    def test_comp_3(self):
+        return self.comp_3
+
+    def test_comp_4(self):
+        return self.comp_4
+
+
 class DataUni(BaseModel):
     title: str = None
     region: str = None
@@ -27,22 +46,3 @@ class DataUni(BaseModel):
 
         if value in ('', None):
             return 0
-
-
-class DataComp(BaseModel):
-    comp_0: str = BroadSubArea
-    comp_2: str = PublicHoliday
-    comp_3: str = UniRank
-    comp_4: str = UniWebEmail
-
-    def test_comp_0(self):
-        return self.comp_0
-
-    def test_comp_2(self):
-        return self.comp_2
-
-    def test_comp_3(self):
-        return self.comp_3
-
-    def test_comp_4(self):
-        return self.comp_4
